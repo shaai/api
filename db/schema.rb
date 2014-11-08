@@ -11,10 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20141108182212) do
+ActiveRecord::Schema.define(version: 20141108234448) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "api_keys", force: true do |t|
+    t.string   "access_token"
+    t.string   "role"
+    t.integer  "user_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "api_keys", ["access_token"], name: "index_api_keys_on_access_token", using: :btree
+  add_index "api_keys", ["user_id"], name: "index_api_keys_on_user_id", using: :btree
 
   create_table "carts", force: true do |t|
     t.datetime "created_at", null: false
@@ -40,6 +51,11 @@ ActiveRecord::Schema.define(version: 20141108182212) do
   add_index "line_items", ["order_id"], name: "index_line_items_on_order_id", using: :btree
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
 
+  create_table "options", force: true do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "orders", force: true do |t|
     t.string   "name"
     t.text     "address"
@@ -61,5 +77,30 @@ ActiveRecord::Schema.define(version: 20141108182212) do
   end
 
   add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
+
+  create_table "users", force: true do |t|
+    t.string   "username",               default: "", null: false
+    t.string   "email",                  default: "", null: false
+    t.string   "first_name"
+    t.string   "last_name"
+    t.string   "street_1"
+    t.string   "street_2"
+    t.string   "city"
+    t.string   "state"
+    t.integer  "zip"
+    t.string   "password_hash"
+    t.string   "password_salt"
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.integer  "sign_in_count",          default: 0,  null: false
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+  end
+
+  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
 end
