@@ -5,7 +5,7 @@ class LineItems < ActiveRecord::Migration
       t.belongs_to :cart, index: true
       t.references :order, index: true
       t.integer :quantity, default: 1
-      t.timestamps nul: false
+      t.timestamps null: false
     end
   end
 end
