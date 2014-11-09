@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  get '/' => redirect('https://github.com/BobsBagels/api')
   resources :orders
   resources :line_items
   resources :carts
