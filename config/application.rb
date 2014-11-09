@@ -17,6 +17,7 @@ Bundler.require(*Rails.groups)
 module Api1
   class Application < Rails::Application
 
+    config.middleware.use Rack::SslEnforcer
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
