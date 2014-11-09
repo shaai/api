@@ -40,4 +40,10 @@ RSpec.configure do |config|
   # The different available types are documented in the features, such as in
   # https://relishapp.com/rspec/rspec-rails/docs
   config.infer_spec_type_from_file_location!
+
+
+  def json(body)
+    JSON.parse(body, symbolize_names: true)
+  end
+
 end
