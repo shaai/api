@@ -1,12 +1,14 @@
 class ProductsController < ApplicationController
-
+  before_action :set_product, only: [:show, :edit, :update, :destroy]
   def index
     @products = Product.order(:category_id)
     render json: @products
   end
 
   def show
-    @product = Product.find(params[:id])
+  end
+
+  def edit
   end
 
   def create
@@ -18,8 +20,17 @@ class ProductsController < ApplicationController
     end
   end
 
+  def destroy
+    @product.destroy
+    head 204
+  end
+
   private
   def product_params
     params.require(:product).permit(:title, :description, :price, :image_url, :category_id)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 end
