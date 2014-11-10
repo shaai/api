@@ -17,8 +17,7 @@ class CategoriesController < ApplicationController
   end
 
   def show
-    render json: category, status: 200
-  rescue ActiveRecord::RecordNotFound
+    render json: @category, status: 200
   end
 
   private 
