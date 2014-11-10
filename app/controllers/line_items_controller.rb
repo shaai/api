@@ -6,6 +6,7 @@ class LineItemsController < ApplicationController
 
   def index
     @line_items = LineItem.all
+    render json: @line_items, status: 200
   end
 
   def show

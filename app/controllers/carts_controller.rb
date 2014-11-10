@@ -4,6 +4,7 @@ class CartsController < ApplicationController
 
   def index
     @cart = Cart.all
+    render json: @cart, status: 200
   end
 
   def show

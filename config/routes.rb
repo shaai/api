@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
 
   get '/' => redirect('https://github.com/BobsBagels/api')
+  resources :categories, only: [:index,:show,:new]
+  resources :products
   resources :orders
   resources :line_items
   resources :carts
-  resources :products
   resources :users
-  resources :categories
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
