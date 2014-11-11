@@ -44,4 +44,8 @@ class CartsController < ApplicationController
   def invalid_cart
     render :json, status: 422
   end
+
+  def line_item
+
+  end
 end

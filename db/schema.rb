@@ -52,8 +52,11 @@ ActiveRecord::Schema.define(version: 20141108234448) do
   add_index "line_items", ["product_id"], name: "index_line_items_on_product_id", using: :btree
 
   create_table "options", force: true do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.text     "items"
+    t.decimal  "price",        precision: 8, scale: 2
+    t.integer  "line_item_id"
+    t.datetime "created_at",                           null: false
+    t.datetime "updated_at",                           null: false
   end
 
   create_table "orders", force: true do |t|
