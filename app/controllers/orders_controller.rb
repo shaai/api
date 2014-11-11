@@ -3,8 +3,9 @@ class OrdersController < ApplicationController
 
   def create
     @order = Order.create(order_params)
-    if @order.line_items.empty?
-      return
+    @cart = Cart.find(order_params[:cart_id])
+    if @cart.line_items.empty? 
+      binding.pry  
     end
     if @order.save
       render json: @order, status: :created, location: @order
