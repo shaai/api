@@ -6,8 +6,6 @@ class OptionsController < ApplicationController
   def create
     @option = Option.create(options_params)
     @line_item = LineItem.find(options_params[:line_item_id])
-
-    binding.pry
     if @option.save
       render json: @option, status: :created, location: @option
     else
