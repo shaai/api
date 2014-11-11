@@ -1,0 +1,21 @@
+class OrdersController < ApplicationController
+  before_action :set_order, only: [:show,:edit,:update,:destroy]
+
+  def create
+    @order = Order.create(order_params)
+    if @order.line_items.empty?
+      return
+    end
+    if @order.save
+      render json: @order, status: :created, location: @order
+    else
+      render json: @order.errors, status: :unprocessable_entity
+    end
+  end
+
+  private
+  def order_params
+    params.require(:order).permit(:name, :address, :email, :pay_type, :delivery, :cart_id)
+  end
+
+end
