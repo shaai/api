@@ -18,11 +18,11 @@ module Api1
   class Application < Rails::Application
 
     # config.middleware.use Rack::SslEnforcer
-    config.middleware.use Rack::SslEnforcer, :only_environments => ['production', /^QA/]
+    config.middleware.use Rack::SslEnforcer, only_environments: ['production', /^QA/]
     config.middleware.use Rack::Cors do
       allow do
         origins '*'
-        resource '*', :headers => :any, :methods => [:get, :post, :put, :delete, :options]
+        resource '*', headers: :any, methods: [:get, :post, :put, :delete, :options]
       end
     end
 

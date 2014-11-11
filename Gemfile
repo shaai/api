@@ -17,6 +17,7 @@ group :development, :test do
   gem 'faker'
   gem 'dotenv-rails'
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 # To use Jbuilder templates for JSON

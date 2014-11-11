@@ -2,7 +2,6 @@ class LineItemsController < ApplicationController
   include CurrentCart
   before_action :set_cart, only: [:create]
   before_action :set_line_item, only: [:show,:edit,:update,:destroy]
-  before_action :set_line_item, only: [:show,:edit,:update,:destroy]
 
   def index
     @line_items = LineItem.all
@@ -14,9 +13,11 @@ class LineItemsController < ApplicationController
   end
 
   def create
-    product = Product.find(params[:product_id])
-    @line_item = @cart.line_items.build(product: product)
-    
+    @line_item = LineItem.new(line_item_params)
+    @product = Product.find(line_item_params[:product_id])
+    @cart = Cart.find(line_item_params[:cart_id])
+    @line_item.quantity = line_item_params[:quantity]
+
     if @line_item.save
       render json: @line_item, status: :created, location: @line_item
     else
@@ -33,7 +34,7 @@ class LineItemsController < ApplicationController
 
   private
   def line_item_params
-    params.require(:line_item).permit(:product_id)
+    params.require(:line_item).permit(:product_id, :quantity, :cart_id)
   end
 
   def set_line_item
