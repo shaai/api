@@ -21,7 +21,7 @@ class LineItemsController < ApplicationController
     
     if @line_item.save
       # format.json render partial: "line_items/show.json", status: :created, location: @line_item
-      render json: @line_item, status: :created, location: @line_item
+      render json: @line_item, include: @line_item.total_price, status: :created, location: @line_item
     else
       render json: @line_item.errors, status: :unprocessable_entity
     end
