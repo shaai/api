@@ -9,7 +9,7 @@ class LineItem < ActiveRecord::Base
   belongs_to :cart
   has_many :options
 
-  def total_price
+  def self.total_price
     product.price * quantity
   end
 end
