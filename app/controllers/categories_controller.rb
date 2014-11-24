@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :set_category, only: [:show]
 
   def index
-    @categories = Category.all
+    @categories = Category.includes(:products).all
     render json: @categories
   end
 
@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
     render json: @category, status: 200
   end
 
-  private 
+  private
   def categories_params
     params.require(:category).permit(:name)
   end
